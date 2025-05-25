@@ -29,7 +29,7 @@ export default function Detail() {
           <button onClick={() => navigate(-1)}>뒤로가기</button>
         </>
       ) : (
-        "x" // 못찾았을때
+        "x"
       )}
     </Container>
   );

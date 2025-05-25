@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { usePokemon } from "../context/PokemonContext";
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
 
@@ -11,23 +12,17 @@ const DashboardContainer = styled.div`
   height: 200px;
   gap: 20px;
 `;
-export default function Dashboard({ pokemons, onAdd, onDelete }) {
+export default function Dashboard() {
+  const { selectedPokemons } = usePokemon();
   useEffect(() => {
-    console.log("Dashboard 업데이트됨!", pokemons);
-    console.log(pokemons);
-  }, [pokemons]);
+    console.log("Dashboard 업데이트됨!", selectedPokemons);
+  }, [selectedPokemons]);
   return (
     <DashboardContainer>
-      {pokemons.map((pokemon) => (
-        <PokemonCard
-          key={pokemon.id}
-          pokemon={pokemon}
-          onAdd={onAdd}
-          onDelete={onDelete}
-          action="delete"
-        />
+      {selectedPokemons.map((pokemon) => (
+        <PokemonCard key={pokemon.id} pokemon={pokemon} action="delete" />
       ))}
-      {pokemons.length == 0 && <span>Dashboard 영역입니다</span>}
+      {selectedPokemons.length == 0 && <span>Dashboard 영역입니다</span>}
     </DashboardContainer>
   );
 }

@@ -9,18 +9,12 @@ const GridContainer = styled.div`
   max-width: 1000px;
 `;
 
-export default function PokemonList({ onAdd, onDelete }) {
+export default function PokemonList() {
   const pokemons = MOCK_DATA;
   return (
     <GridContainer>
       {pokemons.map((pokemon) => (
-        <PokemonCard
-          key={pokemon.id}
-          pokemon={pokemon}
-          onAdd={onAdd}
-          onDelete={onDelete}
-          action="add"
-        />
+        <PokemonCard key={pokemon.id} pokemon={pokemon} action="add" />
       ))}
     </GridContainer>
   );
