@@ -12,11 +12,9 @@ const Container = styled.div`
 
 export default function Dex() {
   return (
-    <PokemonProvider>
-      <Container>
-        <Dashboard />
-        <PokemonList />
-      </Container>
-    </PokemonProvider>
+    <Container>
+      <Dashboard />
+      <PokemonList />
+    </Container>
   );
 }
