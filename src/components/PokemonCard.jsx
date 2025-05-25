@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { usePokemon } from "../context/PokemonContext";
 import styled from "styled-components";
 
 const CardContainer = styled.div`
@@ -20,10 +21,10 @@ const CardContainer = styled.div`
   }
 `;
 
-export default function PokemonCard({ pokemon, onAdd, onDelete, action }) {
+export default function PokemonCard({ pokemon, action }) {
+  const { onAdd, onDelete } = usePokemon();
   const navigate = useNavigate();
   const isAdd = action === "add";
-  if (!pokemon) return null;
   const handleOnClick = (e) => {
     e.stopPropagation();
     isAdd ? onAdd?.(pokemon) : onDelete?.(pokemon);
