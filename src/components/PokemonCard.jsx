@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { usePokemon } from "../context/PokemonContext";
+import { useDispatch } from "react-redux";
+
 import styled from "styled-components";
+import { addPokemon, deletePokemon } from "../store/pokemonSlice";
 
 const CardContainer = styled.div`
   display: flex;
@@ -22,12 +24,16 @@ const CardContainer = styled.div`
 `;
 
 export default function PokemonCard({ pokemon, action }) {
-  const { onAdd, onDelete } = usePokemon();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAdd = action === "add";
   const handleOnClick = (e) => {
     e.stopPropagation();
-    isAdd ? onAdd?.(pokemon) : onDelete?.(pokemon);
+    if (isAdd) {
+      dispatch(addPokemon(pokemon));
+    } else {
+      dispatch(deletePokemon(pokemon));
+    }
   };
 
   return (

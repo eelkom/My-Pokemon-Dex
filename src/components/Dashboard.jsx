@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { usePokemon } from "../context/PokemonContext";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
 
@@ -13,7 +13,9 @@ const DashboardContainer = styled.div`
   gap: 20px;
 `;
 export default function Dashboard() {
-  const { selectedPokemons } = usePokemon();
+  const selectedPokemons = useSelector(
+    (state) => state.pokemon.selectedPokemons
+  );
   useEffect(() => {
     console.log("Dashboard 업데이트됨!", selectedPokemons);
   }, [selectedPokemons]);
@@ -22,7 +24,7 @@ export default function Dashboard() {
       {selectedPokemons.map((pokemon) => (
         <PokemonCard key={pokemon.id} pokemon={pokemon} action="delete" />
       ))}
-      {selectedPokemons.length == 0 && <span>Dashboard 영역입니다</span>}
+      {selectedPokemons.length === 0 && <span>Dashboard 영역입니다</span>}
     </DashboardContainer>
   );
 }
